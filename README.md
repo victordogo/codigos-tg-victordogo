@@ -1,5 +1,5 @@
 
-# codigos-tg1-victordogo
+# codigos-tg-victordogo
 
 Este repositório contém os códigos utilizados para a escrita de meu Trabalho de Graduação, requisito para a obtenção do título de Bacharel em Estatística pela Universidade Federal de São Carlos - UFSCar.
 

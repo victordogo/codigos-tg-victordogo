@@ -172,9 +172,11 @@ combats <- combats |>
     )
   )
 
-## Exportando dataset final
+## Detecção de outliers via mahalanobis
 
-combats |>
+# Selecionando dataset final
+
+df <- combats |>
   dplyr::mutate(
     across(
       .cols=c(tipo1_atk:tipo2_def,res_tipo1,res_tipo2),
@@ -187,5 +189,32 @@ combats |>
     diff_def,diff_satk,diff_sdef,diff_spd,
     res_tipo1,res_tipo2, gen_atk, gen_def,
     leg_atk, leg_def
-  ) |>
+  )
+
+# Preparando dataset mahalanobis
+
+df_ma <- df[-c(2:7)] |>
+  dplyr::mutate(
+    dplyr::across(.fns=as.numeric)
+  )
+
+# Realizando calculo das distancias
+
+md <- mahalanobis(df_ma, center = colMeans(df_ma), cov = cov(df_ma))
+
+# Estabelecendo limite
+
+alpha <- .001
+
+lim <- (qchisq(p = 1 - alpha, df = ncol(df_ma)))
+
+# Encontrando outliers
+
+out <- which(md > lim)
+
+df <- df[-out,]
+
+## Exportando dataset final
+
+df |>
   readr::write_rds('data/pokebattle.rds')

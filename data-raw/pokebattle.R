@@ -208,7 +208,7 @@ alpha <- .001
 
 lim <- (qchisq(p = 1 - alpha, df = ncol(df_ma)))
 
-# Encontrando outliers
+# Encontrando e filtrando outliers
 
 out <- which(md > lim)
 

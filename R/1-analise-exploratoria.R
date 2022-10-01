@@ -18,8 +18,7 @@ df$win |>
 df |>
   corrr::correlate(method='pearson') |>
   ggplot2::autoplot(high='red')+
-  ggplot2::geom_text(ggplot2::aes(label=round(r,2)),
-                     size=10)+
+  ggplot2::geom_text(ggplot2::aes(label=round(r,2)))+
   ggplot2::theme_minimal(base_size = 16)+
   ggplot2::theme(legend.position = 'none')+
   ggplot2::labs(title='Gráfico de Correlação de Pearson',
@@ -242,10 +241,10 @@ leg_atk <- df |>
   ) |>
   ggplot2::ggplot()+
   ggplot2::aes(y=n,x=leg_atk,fill=win)+
-  ggplot2::geom_bar(stat='identity', position='dodge', color='black')+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'left')+
-  ggplot2::labs(y='numero de observações',
+  ggplot2::labs(y='proporção observada',
                 title='leg_atk')
 
 leg_def <- df |>
@@ -258,10 +257,10 @@ leg_def <- df |>
   ) |>
   ggplot2::ggplot()+
   ggplot2::aes(y=n,x=leg_def,fill=win)+
-  ggplot2::geom_bar(stat='identity', position='dodge', color='black')+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'none')+
-  ggplot2::labs(y='numero de observações',
+  ggplot2::labs(y='proporção observada',
                 title='leg_def')
 
 leg_atk+leg_def
@@ -280,10 +279,10 @@ gen_atk <- df |>
   ) |>
   ggplot2::ggplot()+
   ggplot2::aes(y=n,x=gen_atk,fill=win)+
-  ggplot2::geom_bar(stat='identity', position='dodge', color='black')+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'none')+
-  ggplot2::labs(y='numero de observações',
+  ggplot2::labs(y='proporção observada',
                 title='gen_atk')
 
 gen_def <- df |>
@@ -296,10 +295,10 @@ gen_def <- df |>
   ) |>
   ggplot2::ggplot()+
   ggplot2::aes(y=n,x=gen_def,fill=win)+
-  ggplot2::geom_bar(stat='identity', position='dodge', color='black')+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')+
-  ggplot2::labs(y='numero de observações',
+  ggplot2::labs(y='proporção observada',
                 title='gen_def')
 
 gen_atk/gen_def

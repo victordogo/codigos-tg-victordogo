@@ -15,14 +15,25 @@ df$win |>
 
 #### Grafico de Correlacao
 
-df |>
+cor_win_0 <- df[df$win==0,] |>
   corrr::correlate(method='pearson') |>
   ggplot2::autoplot(high='red')+
   ggplot2::geom_text(ggplot2::aes(label=round(r,2)))+
   ggplot2::theme_minimal(base_size = 16)+
   ggplot2::theme(legend.position = 'none')+
-  ggplot2::labs(title='Gráfico de Correlação de Pearson',
-                subtitle = 'de covariáveis numéricas')
+  ggplot2::labs(title='Correlação de Pearson',
+                subtitle = 'de covariáveis numéricas (win=0)')
+
+cor_win_1 <- df[df$win==1,] |>
+  corrr::correlate(method='pearson') |>
+  ggplot2::autoplot(high='red')+
+  ggplot2::geom_text(ggplot2::aes(label=round(r,2)))+
+  ggplot2::theme_minimal(base_size = 16)+
+  ggplot2::theme(legend.position = 'none')+
+  ggplot2::labs(title='Correlação de Pearson',
+                subtitle = 'de covariáveis numéricas (win=1)')
+
+cor_win_0 + cor_win_1
 
 ggplot2::ggsave('img/1-corr-plot.png')
 
@@ -304,3 +315,9 @@ gen_def <- df |>
 gen_atk/gen_def
 
 ggplot2::ggsave('img/5-gen-win-compar.png')
+
+### Estimação da rede bayesiana com base nos dados
+
+df[,c(1,8:13)] |>
+  bnlearn::tabu() |>
+  plot()

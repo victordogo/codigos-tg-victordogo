@@ -16,7 +16,7 @@ df$win |>
 #### Grafico de Correlacao
 
 cor_win_0 <- df[df$win==0,] |>
-  corrr::correlate(method='pearson') |>
+  corrr::correlate(method='pearson')|>
   ggplot2::autoplot(high='red')+
   ggplot2::geom_text(ggplot2::aes(label=round(r,2)))+
   ggplot2::theme_minimal(base_size = 16)+

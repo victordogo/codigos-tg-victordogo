@@ -153,14 +153,15 @@ roc_flex_epa <- pROC::roc(response = val$win,
                                               type='prob')[,1])
 
 pROC::ggroc(
-  list(Gaussiano=roc_flex_gaus, Uniforme=roc_flex_uni,
-       Parabolico=roc_flex_epa),
+  list(Parabolico=roc_flex_epa, Uniforme=roc_flex_uni,
+       Gaussiano=roc_flex_gaus),
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Kernel', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para ajustes via Bayes Ingênuo Flexível',
-                subtitle = 'considerando Kernels Gaussiano, Uniforme e Parabólico')+
-  ggplot2::theme_minimal()
+                title='Curvas ROC para ajustes via Bayes Ingênuo Flexível',
+                subtitle = 'considerando Kernels Gaussiano, Uniforme e Parabólico (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/6-roc-completo-flex.png')
 
@@ -224,9 +225,10 @@ pROC::ggroc(
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Ajuste', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para Modelos Completos',
-                subtitle = 'considerando BI Gaussiano, BI Flexível e Reg. Logística')+
-  ggplot2::theme_minimal()
+                title='Curvas ROC para Modelos Completos',
+                subtitle = 'considerando BI Gaussiano, BI Flexível e Reg. Logística (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/7-roc-completo-all.png')
 
@@ -307,10 +309,11 @@ pROC::ggroc(
        `Lasso`=roc_lasso_gaus),
   legacy.axes=TRUE, size=1
 )+
-  ggplot2::labs(color='Método de Seleção', x='1-Especificidade', y='Sensibilidade',
+  ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Bayes Ingênuo Gaussiano',
-                subtitle = 'considerando a variável diff_spd')+
-  ggplot2::theme_minimal()
+                subtitle = 'com modelo completo e seleção de variáveis via Árvore e Lasso (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/9-roc-gaus-diff-spd.png')
 
@@ -412,9 +415,10 @@ pROC::ggroc(
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Kernel', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para Bayes Ingênuo Flexível',
-                subtitle = 'considerando seleção de variáveis via Árvore e diff_spd')+
-  ggplot2::theme_minimal()
+                title='Curvas ROC para Bayes Ingênuo Flexível',
+                subtitle = 'considerando seleção de variáveis via Árvore (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/10-roc-flex-arv-diff-spd.png')
 
@@ -437,9 +441,10 @@ pROC::ggroc(
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Kernel', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para Bayes Ingênuo Flexível',
-                subtitle = 'considerando seleção de variáveis via Lasso e diff_spd')+
-  ggplot2::theme_minimal()
+                title='Curvas ROC para Bayes Ingênuo Flexível',
+                subtitle = 'considerando seleção de variáveis via Lasso (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/11-roc-flex-lasso-diff-spd.png')
 
@@ -477,9 +482,10 @@ pROC::ggroc(
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para Bayes Ingênuo Flexível',
-                subtitle = 'comparando seleção de variáveis e com var. diff_spd')+
-  ggplot2::theme_minimal()
+                title='Curvas ROC para Bayes Ingênuo Flexível',
+                subtitle = 'considerando modelo completo e seleção de variáveis via Árvore e Lasso (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/12-roc-flex-all-diff-spd.png')
 
@@ -546,10 +552,11 @@ pROC::ggroc(
   list(`Completo`=roc_log_full, `Lasso`=roc_log_lasso),
   legacy.axes=TRUE, size=1
 )+
-  ggplot2::labs(color='Variáveis', x='1-Especificidade', y='Sensibilidade',
+  ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Regressão Logística',
-                subtitle = 'considerando a variável diff_spd')+
-  ggplot2::theme_minimal()
+                subtitle = 'considerando modelo completo e seleção de variáveis via Lasso (com diff_spd)')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/13-roc-log-diff-spd.png')
 
@@ -641,9 +648,10 @@ pROC::ggroc(
   legacy.axes=TRUE, size=1
 )+
   ggplot2::labs(color='Ajuste', x='1-Especificidade', y='Sensibilidade',
-                title='Curva ROC para Melhores Ajustes',
+                title='Curvas ROC para Melhores Ajustes',
                 subtitle = 'considerando a variável diff_spd')+
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')
 
 ggplot2::ggsave('img/14-roc-all-diff-spd.png')
 

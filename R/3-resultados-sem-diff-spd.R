@@ -161,7 +161,7 @@ pROC::ggroc(
 )+
   ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Bayes Ingênuo Gaussiano',
-                subtitle = 'considerando modelo completo e seleção de variáveis via Árvore e Lasso (sem diff_spd)')+
+                subtitle = 'com modelo completo e variáveis via Árvore e Lasso (sem diff_spd)')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')
 
@@ -322,7 +322,7 @@ pROC::ggroc(
 )+
   ggplot2::labs(color='Kernel', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Bayes Ingênuo Flexível',
-                subtitle = 'considerando seleção de variáveis via Árvore (sem diff_spd)')+
+                subtitle = 'com variáveis via Árvore (sem diff_spd)')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')
 
@@ -348,7 +348,7 @@ pROC::ggroc(
 )+
   ggplot2::labs(color='Kernel', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Bayes Ingênuo Flexível',
-                subtitle = 'considerando seleção de variáveis via Lasso (sem diff_spd)')+
+                subtitle = 'com variáveis via Lasso (sem diff_spd)')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')
 
@@ -401,7 +401,7 @@ pROC::ggroc(
 )+
   ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Bayes Ingênuo Flexível',
-                subtitle = 'com modelo completo e seleção de variáveis via Árvore e Lasso (sem diff_spd)')+
+                subtitle = 'com modelo completo e variáveis via Árvore e Lasso (sem diff_spd)')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')
 
@@ -472,7 +472,7 @@ pROC::ggroc(
 )+
   ggplot2::labs(color='Seleção', x='1-Especificidade', y='Sensibilidade',
                 title='Curvas ROC para Regressão Logística',
-                subtitle = 'considerando modelo completo e seleção de variáveis via Lasso (sem diff_spd)')+
+                subtitle = 'com modelo completo e variáveis via Lasso (sem diff_spd)')+
   ggplot2::theme_minimal()+
   ggplot2::theme(legend.position = 'top')
 
@@ -582,3 +582,4 @@ tibble::tibble(
   tidyr::pivot_wider(names_from=Metrica) |>
   dplyr::rename(Ajuste=name) |>
   knitr::kable('latex', digits=4)
+

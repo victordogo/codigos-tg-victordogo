@@ -316,8 +316,65 @@ gen_atk/gen_def
 
 ggplot2::ggsave('img/5-gen-win-compar.png')
 
+#### Comparacao de resistencias para win0 e win1
+
+res1 <- df |>
+  dplyr::group_by(res_tipo1, win) |>
+  dplyr::summarise(n=dplyr::n()) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    dplyr::across(.cols=-3,
+                  .fns=as.character),
+    res_tipo1=dplyr::case_when(
+      res_tipo1=='0' ~ '1-Imune',
+      res_tipo1=='0.25' ~ '2-Muito Resistente',
+      res_tipo1=='0.5' ~ '3-Resistente',
+      res_tipo1=='1' ~ '4-Neutro',
+      res_tipo1=='2' ~ '5-Fraco',
+      res_tipo1=='4' ~ '6-Muito Fraco'
+    )
+  ) |>
+  ggplot2::ggplot()+
+  ggplot2::aes(y=n,x=res_tipo1,fill=win)+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'none')+
+  ggplot2::labs(y='proporção observada',
+                title='res_tipo1')
+
+res2 <- df |>
+  dplyr::group_by(res_tipo2, win) |>
+  dplyr::summarise(n=dplyr::n()) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    dplyr::across(.cols=-3,
+                  .fns=as.character),
+    res_tipo2=dplyr::case_when(
+      res_tipo2=='0' ~ '1-Imune',
+      res_tipo2=='0.25' ~ '2-Muito Resistente',
+      res_tipo2=='0.5' ~ '3-Resistente',
+      res_tipo2=='1' ~ '4-Neutro',
+      res_tipo2=='2' ~ '5-Fraco',
+      res_tipo2=='4' ~ '6-Muito Fraco'
+    )
+  ) |>
+  ggplot2::ggplot()+
+  ggplot2::aes(y=n,x=res_tipo2,fill=win)+
+  ggplot2::geom_bar(stat='identity', position='fill', color='black')+
+  ggplot2::theme_minimal()+
+  ggplot2::theme(legend.position = 'top')+
+  ggplot2::labs(y='proporção observada',
+                title='res_tipo2')
+
+res1/res2
+
+ggplot2::ggsave('img/5-res-win-compar.png')
+
+#### GRAFICOS SECAO DE RESULTADOS
+
 ### Estimação da rede bayesiana com base nos dados
 
 df[,c(1,8:13)] |>
   bnlearn::tabu() |>
   plot()
+
